@@ -71,4 +71,9 @@ PerlsAssistant.add_command(shitpost)
 PerlsAssistant.add_command(getids)
 PerlsAssistant.add_command(helpme)
 PerlsAssistant.add_command(signup)
+<<<<<<< HEAD
 PerlsAssistant.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4') ## Don't share lol.
+=======
+PerlsAssistant.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
+
+>>>>>>> f62a5716754875c95607587737fbe3940f31f279
