@@ -4,14 +4,22 @@ from discord.ext import commands
 import os
 import discord
 from flask import ctx
-from discord import Member
+from discord import Client, Member
 
 intents = discord.Intents.default()
 intents.message_content = True
 
-bot = commands.Bot(command_prefix='^', intents=intents)
+PerlsAssistant = commands.Bot(command_prefix='^', intents=intents)
 
-
+@PerlsAssistant.event
+async def on_ready():
+    print("Everything's all ready to go~")
+    print(""">> Everything's all ready to go :)""")
+    os.system('cls')
+    print("\033[0;35mPerl's Assistant, Version One\033[0m")
+    print("\033[1;30m")
+    
+   
 @commands.command()
 async def test(ctx):
     await ctx.send("test") 
@@ -41,9 +49,26 @@ async def helpme(ctx):
     PLEASE BE AWARE MOST OF THESE FEATURES HAVE NOT YET BEEN COMPLETED.
     THIS IS A BETA BOT""")
 
+@commands.command()
+async def signup(ctx, user: discord.User = None, *, value = None):
+  if user == ctx.message.author:
+    await ctx.send("You can't DM yourself goofy")
+    await user.send(value)
+  else:
+    await ctx.message.delete()
+    if user == None:
+      await ctx.send(f'**{ctx.message.author},** Please Use a valid username')
+    else:
+      if value == None:
+        await ctx.send(f'**{ctx.message.author},**  Please Use a valid username')
+      else:
+        await user.send(value)
 
-bot.add_command(test)
-bot.add_command(shitpost)
-bot.add_command(getids)
-bot.add_command(helpme)
-bot.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
+
+
+PerlsAssistant.add_command(test)
+PerlsAssistant.add_command(shitpost)
+PerlsAssistant.add_command(getids)
+PerlsAssistant.add_command(helpme)
+PerlsAssistant.add_command(signup)
+PerlsAssistant.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
