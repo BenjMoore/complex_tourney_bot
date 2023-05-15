@@ -116,3 +116,4 @@ PerlsAssistant.add_command(ping)
 PerlsAssistant.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
 client.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
 ## DO NOT SHARE ##
+## I farted and a poopy slipped out! REHEEHEE ##
