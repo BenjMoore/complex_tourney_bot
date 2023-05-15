@@ -17,7 +17,19 @@ intents = discord.Intents.default()
 intents.message_content = True ## Sets Permissions for discord, ie intent to see write and manage the server
 
 PerlsAssistant = commands.Bot(command_prefix='^', intents=intents) ## Initialise Bot (Bot in variable names is PerlsAssistant)
+client = discord.Client(intents=intents)
 
+@client.event
+async def on_message(self,message):
+  await ctx.send("test") 
+  x = 5
+  flaggedMessages = ["FUCK"]
+  if message.author == self.user:
+    if message == flaggedMessages:
+      if message.ignoresCase() == message.created_at < x:
+        await ctx.message.delete()
+    return
+    
 ## WHEN BOT HAS STARTED ##
 @PerlsAssistant.event # event is onready ie when bot starts
 async def on_ready():
@@ -26,8 +38,9 @@ async def on_ready():
     os.system('cls') # clear screen
     print("\033[0;35mPerl's Assistant, Version One\033[0m")
     print("\033[1;30m")
-  
-   
+    Client(intents=intents)
+    
+
 @commands.command()
 async def test(ctx):
     await ctx.send("test") 
@@ -101,4 +114,5 @@ PerlsAssistant.add_command(ping)
 
 ## DO NOT SHARE ##
 PerlsAssistant.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
+client.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
 ## DO NOT SHARE ##
