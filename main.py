@@ -12,7 +12,7 @@ import discord
 from flask import ctx
 from discord import Client, Member
 import datetime
-from perlsShitPostLibrary import *
+from libs.perlsShitPostLibrary import *
 
 ## Imports END ##
 
@@ -73,6 +73,9 @@ async def test(ctx):
 async def shitpost(ctx):
     perlsShitPostLibrary = [goblinmanString,whatdidyousaytomeString,gotchaString]
     selectedShitPost = random.choice(perlsShitPostLibrary)
+    user = ctx.author
+    channel = ctx.channel
+    print(user,"[",channel," ] - Ran The Shitpost Command!") ## Add counter
     await ctx.send(selectedShitPost)
 ## SHITPOST END ##
 
@@ -80,6 +83,9 @@ async def shitpost(ctx):
 @commands.command()
 async def getids(ctx):
     await ctx.send(f"```ID >> {ctx.author.id} << Please use this in your signup!```")
+    user = ctx.author
+    channel = ctx.channel
+    print(user,"[",channel," ] - Ran The GetID's Command!") ## Add counter
 
 ## GET IDS END ##
 
@@ -94,16 +100,22 @@ async def helpme(ctx):
     ^signup -- Starts the tourney signup process (In development)
     ^tourneystats [username] -- displays wins losses and kd's (In development)
     ^fighttime [username] -- displays the players next fight time and info about the fight (In development)
-    ^ping -- Shows bot latency (In development)
+    ^ping -- Shows bot latency (Working)
     
     PLEASE BE AWARE MOST OF THESE FEATURES HAVE NOT YET BEEN COMPLETED.
     THIS IS A BETA BOT```""")
+    user = ctx.author
+    channel = ctx.channel
+    print(user,"[",channel," ] - Ran The Help Command!") ## Add counter
 ## HELP END ##
 
 ## PING ##
 @commands.command()
 async def ping(ctx):
      await ctx.send(f"```Pong! My ping is: {round (PerlsAssistant.latency * 1000)} ms```")
+     user = ctx.author
+     channel = ctx.channel
+     print(user,"[",channel," ] - Ran The ping Command!") ## Add counter
 ## PING END ##
 
 
@@ -122,6 +134,9 @@ async def signup(ctx, user: discord.User = None, *, value = None):
         await ctx.send(f'```**{ctx.message.author},**  Please Use a valid username```') # ctx.message.author is the person whom wrote the message
       else:
         await user.send(value)
+  user = ctx.author
+  channel = ctx.channel
+  print(user,"[",channel," ] - Ran The signup Command!") ## Add counter
 
 ## Signup DM Chain END ##
 
