@@ -32,18 +32,23 @@ async def on_message(message):
 
   messages = 0
 ## ANTI SPAM ##
+#DONT WORK #
   for message in channel:
+      # Message.author has no atribute or some shit
       if message.author == PerlsAssistant.user:
           message_time = message.created_at.timestamp()
           if message_time > now - datetime.timedelta(seconds=seconds):
               messages += 1
               if messages == 3:
                   await message.delete()
-      
+# PERL NEEDS TO FIX THIS #
+
+      # WORKS #
       flaggedMessages = "FUCK"
       if user_message == flaggedMessages:
           await message.delete()
       return
+    # DONT TOUCH THIS PLEASE <3 Perl #
  ## ANTI SPAM ##
  
 
