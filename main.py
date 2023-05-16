@@ -15,8 +15,9 @@ import datetime
 from libs.perlsShitPostLibrary import *
 from libs.version import *
 from datetime import datetime
+from dotenv import load_dotenv
 ## Imports END ##
-
+os.system('cls')
 intents = discord.Intents.default()
 
 intents.message_content = True ## Sets Permissions for discord, ie intent to see write and manage the server
@@ -57,6 +58,7 @@ async def on_message(message):
 ## WHEN BOT HAS STARTED ##
 @PerlsAssistant.event # event is onready ie when bot starts
 async def on_ready():
+    load_dotenv()
     print("Everything's all ready to go~")
     print(""">> Everything's all ready to go :)""")
     os.system('cls') # clear screen
@@ -149,6 +151,16 @@ async def signup(ctx, user: discord.User = None, *, value = None):
 
 ## Signup DM Chain END ##
 
+## Terra's Test Command ##
+@commands.command()
+async def givepengu(ctx):
+     await ctx.send(f':pengu:')
+     user = ctx.author
+     channel = ctx.channel
+     print(user,"[",channel," ] - Ran The TerraTest Command!") ## Add counter
+## Terra's Test Command END ##
+
+
 ## Add Commands to bot ##
 
 PerlsAssistant.add_command(shitpost)
@@ -156,11 +168,14 @@ PerlsAssistant.add_command(getids)
 PerlsAssistant.add_command(helpme)
 PerlsAssistant.add_command(signup)
 PerlsAssistant.add_command(ping)
+PerlsAssistant.add_command(TerrasTest)
+## Terra's terrible test command ^^^^^
 
 ## Add Commands to bot END ##
 ## Delete in emergency ##
 
 ## DO NOT SHARE ##
-PerlsAssistant.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
+TOKEN = os.getenv("DISCORD_TOKEN")
+PerlsAssistant.run("MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4")
 
 ## DO NOT SHARE ##
