@@ -85,9 +85,9 @@ async def test(ctx):
     await ctx.send("test") 
 
 ## SHITPOST ##
-@commands.command()
+@commands.command(aliases=['ShitPost', 'Shitpost', 'SHITPOST', 'shitPost'])
 async def shitpost(ctx):
-    perlsShitPostLibrary = [goblinmanString,whatdidyousaytomeString,gotchaString]
+    perlsShitPostLibrary = [goblinmanString,whatdidyousaytomeString,gotchaString,ravenString]
     selectedShitPost = random.choice(perlsShitPostLibrary)
     user = ctx.author
     channel = ctx.channel
@@ -106,7 +106,7 @@ async def getids(ctx):
 ## GET IDS END ##
 
 ## HELP ##
-@commands.command()
+@commands.command(aliases=['HelpMe', 'Helpme', 'HELPME', 'Help'])
 async def helpme(ctx):
     await ctx.send("""```
     Perls Assistant Version One
@@ -126,7 +126,7 @@ async def helpme(ctx):
 ## HELP END ##
 
 ## PING ##
-@commands.command()
+@commands.command(aliases=['Ping', 'PING',])
 async def ping(ctx):
      await ctx.send(f"```Pong! My ping is: {round (PerlsAssistant.latency * 1000)} ms```")
      user = ctx.author
@@ -137,7 +137,7 @@ async def ping(ctx):
 
 ## Signup DM Chain ##
 
-@commands.command()
+@commands.command(aliases=['SignUp', 'Sign', 'SIGNUP', 'SIGNup'])
 async def signup(ctx, user: discord.User = None, *, value = None):
   if user == ctx.message.author: # if person who sends the message is the same person whom wrote the message
     await ctx.send("You can't DM yourself goofy")
