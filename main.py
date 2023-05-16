@@ -14,7 +14,7 @@ from discord import Client, Member
 import datetime
 from libs.perlsShitPostLibrary import *
 from libs.version import *
-
+from datetime import datetime
 ## Imports END ##
 
 intents = discord.Intents.default()
@@ -60,7 +60,7 @@ async def on_ready():
     print("Everything's all ready to go~")
     print(""">> Everything's all ready to go :)""")
     os.system('cls') # clear screen
-    
+    current_dateTime = datetime.now()
     print("\033[1;30m")
     print("""
     
@@ -74,14 +74,9 @@ $$ |      $$   ____|$$ |      $$ | \____$$\       $$ |  $$ | \____$$\  \____$$\ 
 $$ |      \$$$$$$$\ $$ |      $$ |$$$$$$$  |      $$ |  $$ |$$$$$$$  |$$$$$$$  |$$ |$$$$$$$  |  \$$$$  |\$$$$$$$ |$$ |  $$ | \$$$$  |
 \__|       \_______|\__|      \__|\_______/       \__|  \__|\_______/ \_______/ \__|\_______/    \____/  \_______|\__|  \__|  \____/ 
                                                                                                                                      
-                                             Production Version: """,productionVersion," Development Version: ",developmentVersion)
+                    Production Version: """,productionVersion,"| Development Version: ",developmentVersion,"| Bot Started On: ",current_dateTime)
     Client(intents=intents)
     
-
-@commands.command()
-async def test(ctx):
-    await ctx.send("test") 
-
 ## SHITPOST ##
 @commands.command(aliases=['ShitPost', 'Shitpost', 'SHITPOST', 'shitPost'])
 async def shitpost(ctx):
@@ -156,7 +151,6 @@ async def signup(ctx, user: discord.User = None, *, value = None):
 
 ## Add Commands to bot ##
 
-PerlsAssistant.add_command(test)
 PerlsAssistant.add_command(shitpost)
 PerlsAssistant.add_command(getids)
 PerlsAssistant.add_command(helpme)
