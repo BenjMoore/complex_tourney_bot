@@ -74,9 +74,7 @@ $$ |      $$   ____|$$ |      $$ | \____$$\       $$ |  $$ | \____$$\  \____$$\ 
 $$ |      \$$$$$$$\ $$ |      $$ |$$$$$$$  |      $$ |  $$ |$$$$$$$  |$$$$$$$  |$$ |$$$$$$$  |  \$$$$  |\$$$$$$$ |$$ |  $$ | \$$$$  |
 \__|       \_______|\__|      \__|\_______/       \__|  \__|\_______/ \_______/ \__|\_______/    \____/  \_______|\__|  \__|  \____/ 
                                                                                                                                      
-                                     Version {productionVersion}                                                                                               
-                                                                                                                                     
-""")
+                                             Production Version: """,productionVersion," Development Version: ",developmentVersion)
     Client(intents=intents)
     
 
@@ -96,7 +94,7 @@ async def shitpost(ctx):
 ## SHITPOST END ##
 
 ## GET IDS ##
-@commands.command()
+@commands.command(aliases=['GETIDS','GetIDS','GetIds','GetIDs','getIDs'])
 async def getids(ctx):
     await ctx.send(f"```ID >> {ctx.author.id} << Please use this in your signup!```")
     user = ctx.author
