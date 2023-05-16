@@ -10,7 +10,7 @@ from discord.ext import commands
 import os
 import discord
 from flask import ctx
-from discord import Client, Member
+from discord import Client, Emoji, Member
 import datetime
 from libs.perlsShitPostLibrary import *
 from libs.version import *
@@ -82,7 +82,14 @@ $$ |      \$$$$$$$\ $$ |      $$ |$$$$$$$  |      $$ |  $$ |$$$$$$$  |$$$$$$$  |
 ## SHITPOST ##
 @commands.command(aliases=['ShitPost', 'Shitpost', 'SHITPOST', 'shitPost'])
 async def shitpost(ctx):
-    perlsShitPostLibrary = [goblinmanString,whatdidyousaytomeString,gotchaString,ravenString]
+    perlsShitPostLibrary = [goblinmanString,
+                            whatdidyousaytomeString,
+                            gotchaString,ravenString,
+                            hotubManString,
+                            perlsMonitorString,
+                            pickleTubString,
+                            donkeyHard,
+                            drinkingYesString]
     selectedShitPost = random.choice(perlsShitPostLibrary)
     user = ctx.author
     channel = ctx.channel
@@ -93,7 +100,7 @@ async def shitpost(ctx):
 ## GET IDS ##
 @commands.command(aliases=['GETIDS','GetIDS','GetIds','GetIDs','getIDs'])
 async def getids(ctx):
-    await ctx.send(f"```ID >> {ctx.author.id} << Please use this in your signup!```")
+    await ctx.send(f"```Here is your Discord's ID >> {ctx.author.id} << Please use this in your signup!```")
     user = ctx.author
     channel = ctx.channel
     print(user,"[",channel," ] - Ran The GetID's Command!") ## Add counter
@@ -103,25 +110,31 @@ async def getids(ctx):
 ## HELP ##
 @commands.command(aliases=['HelpMe', 'Helpme', 'HELPME', 'Help'])
 async def helpme(ctx):
-    await ctx.send("""```
-    Perls Assistant Version One
-    Commands:
-    ^getids -- Gets Player id  (Working)
-    ^shitpost -- You get it (Working)
-    ^signup -- Starts the tourney signup process (In development)
-    ^tourneystats [username] -- displays wins losses and kd's (In development)
-    ^fighttime [username] -- displays the players next fight time and info about the fight (In development)
-    ^ping -- Shows bot latency (Working)
+    ## remove ()'s when finished
+    ## Rizz may need to be added
+    await ctx.send(f"""
+    __**Help Desk**__
+    **Try:**
     
+    **^getids** --  (Working)
+    **^shitpost** -- (Working)
+    **^signup** -- (In development)
+    **^tourneystats** -- [username] displays wins losses and kd's (In development)
+    **^fighttime** -- [username] displays the players next fight time and info about the fight (In development)
+    **^ping** -- Shows bot latency (Working)
+    **^nootnoot** -- Noot NOOT! (Working)
+
+    **~-We hope you enjoy our commands!-~**
+    Version: {productionVersion}
     PLEASE BE AWARE MOST OF THESE FEATURES HAVE NOT YET BEEN COMPLETED.
-    THIS IS A BETA BOT```""")
+    THIS IS A BETA BOT""")
     user = ctx.author
     channel = ctx.channel
     print(user,"[",channel," ] - Ran The Help Command!") ## Add counter
 ## HELP END ##
 
 ## PING ##
-@commands.command(aliases=['Ping', 'PING',])
+@commands.command()
 async def ping(ctx):
      await ctx.send(f"```Pong! My ping is: {round (PerlsAssistant.latency * 1000)} ms```")
      user = ctx.author
@@ -151,14 +164,14 @@ async def signup(ctx, user: discord.User = None, *, value = None):
 
 ## Signup DM Chain END ##
 
-## Terra's Test Command ##
-@commands.command()
-async def givepengu(ctx):
-     await ctx.send(f':pengu:')
-     user = ctx.author
-     channel = ctx.channel
-     print(user,"[",channel," ] - Ran The TerraTest Command!") ## Add counter
-## Terra's Test Command END ##
+## Terra's NootNoot Command ##
+@commands.command(aliases=['NootNoot','NOOTNOOT', 'Nootnoot'])
+async def nootnoot(ctx):
+  await ctx.send(f'<:pengu:1100294359355760650>')
+  user = ctx.author
+  channel = ctx.channel
+  print(user,"[",channel," ] - Ran the NootNoot Command!") ## Add counter
+## Terra's NootNoot Command END ##
 
 
 ## Add Commands to bot ##
@@ -168,8 +181,8 @@ PerlsAssistant.add_command(getids)
 PerlsAssistant.add_command(helpme)
 PerlsAssistant.add_command(signup)
 PerlsAssistant.add_command(ping)
-PerlsAssistant.add_command(TerrasTest)
-## Terra's terrible test command ^^^^^
+PerlsAssistant.add_command(nootnoot)
+## Terra did this^^^^^
 
 ## Add Commands to bot END ##
 ## Delete in emergency ##
