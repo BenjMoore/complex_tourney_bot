@@ -10,6 +10,7 @@ import os
 import discord
 from flask import ctx
 from discord import Client, Member
+import datetime
 ## Imports END ##
 
 intents = discord.Intents.default()
@@ -17,19 +18,35 @@ intents = discord.Intents.default()
 intents.message_content = True ## Sets Permissions for discord, ie intent to see write and manage the server
 
 PerlsAssistant = commands.Bot(command_prefix='^', intents=intents) ## Initialise Bot (Bot in variable names is PerlsAssistant)
-client = discord.Client(intents=intents)
 
-@client.event
-async def on_message(self,message):
-  await ctx.send("test") 
-  x = 5
-  flaggedMessages = ["FUCK"]
-  if message.author == self.user:
-    if message == flaggedMessages:
-      if message.ignoresCase() == message.created_at < x:
-        await ctx.message.delete()
-    return
-    
+
+@PerlsAssistant.event
+async def on_message(message):
+  username = str(message.author).split("#")[0]
+  user_message = str(message.content)
+  channel = message.channel.name
+  print(f'{username}: {user_message} ({channel})')
+  seconds = 5 # The seconds ago to check messages.
+
+  now = datetime.datetime.now()
+
+  messages = 0
+## ANTI SPAM ##
+  for message in channel:
+      if message.author == PerlsAssistant.user:
+          message_time = message.created_at.timestamp()
+          if message_time > now - datetime.timedelta(seconds=seconds):
+              messages += 1
+              if messages == 3:
+                  await message.delete()
+      
+      flaggedMessages = "FUCK"
+      if user_message == flaggedMessages:
+          await message.delete()
+      return
+ ## ANTI SPAM ##
+ 
+
 ## WHEN BOT HAS STARTED ##
 @PerlsAssistant.event # event is onready ie when bot starts
 async def on_ready():
@@ -114,6 +131,5 @@ PerlsAssistant.add_command(ping)
 
 ## DO NOT SHARE ##
 PerlsAssistant.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
-client.run('MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4')
+
 ## DO NOT SHARE ##
-## I farted and a poopy slipped out! REHEEHEE ##
