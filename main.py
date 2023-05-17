@@ -15,7 +15,7 @@ import datetime
 from libs.perlsShitPostLibrary import *
 from libs.version import *
 from datetime import datetime
-from dotenv import load_dotenv
+from discord.ext.commands import has_permissions, CheckFailure
 ## Imports END ##
 os.system('cls')
 intents = discord.Intents.default()
@@ -58,7 +58,6 @@ async def on_message(message):
 ## WHEN BOT HAS STARTED ##
 @PerlsAssistant.event # event is onready ie when bot starts
 async def on_ready():
-    load_dotenv()
     print("Everything's all ready to go~")
     print(""">> Everything's all ready to go :)""")
     os.system('cls') # clear screen
@@ -105,7 +104,25 @@ async def getids(ctx):
     channel = ctx.channel
     print(user,"[",channel," ] - Ran The GetID's Command!") ## Add counter
 
+
+
 ## GET IDS END ##
+
+## SENDAS BOT ##
+
+@commands.command(aliases=['SendAs','sendas'],pass_context=True)
+@has_permissions(administrator=True, manage_messages=True, manage_roles=True)
+async def sendAs(ctx, content):
+        user = ctx.author
+        channel = ctx.channel
+        print(user,"[",channel," ] - Sent: ",content," with SendAs Command") ## Add counter
+        await ctx.send(f"```{content}```")
+    
+@sendAs.error
+async def mod_ban_error(error, ctx):
+    if isinstance(error, CheckFailure):
+        await PerlsAssistant.send_message(ctx.message.channel, "Looks like you don't have the perm.")
+## SENDAS BOT END ##
 
 ## HELP ##
 @commands.command(aliases=['HelpMe', 'Helpme', 'HELPME', 'Help'])
@@ -182,13 +199,13 @@ PerlsAssistant.add_command(helpme)
 PerlsAssistant.add_command(signup)
 PerlsAssistant.add_command(ping)
 PerlsAssistant.add_command(nootnoot)
+PerlsAssistant.add_command(sendAs)
 ## Terra did this^^^^^
 
 ## Add Commands to bot END ##
 ## Delete in emergency ##
 
 ## DO NOT SHARE ##
-TOKEN = os.getenv("DISCORD_TOKEN")
 PerlsAssistant.run("MTA5ODg2MDg0NTQyMjg4NjkzMg.GGMh8h.qDvKf1cb9RROxHeflGqUNn2tc_ZCvmWnOqAqU4")
 
 ## DO NOT SHARE ##
