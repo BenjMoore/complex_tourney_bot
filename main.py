@@ -190,6 +190,18 @@ async def nootnoot(ctx):
   print(user,"[",channel," ] - Ran the NootNoot Command!") ## Add counter
 ## Terra's NootNoot Command END ##
 
+## Terra's slut command START ##
+@commands.command(aliases=['Suggest','SUGGEST', 'SUggest'])
+async def suggest(ctx):
+  suggest = ctx.message ## reading the message sent
+  channel = ctx.get_channel(1108282222030639145) ## selecting the channel
+  ctx.channel.send(suggest)
+  await ctx.send('butt') ## after suggestion is read, send this
+  user = ctx.author ## for the below
+  
+  print(user,"[",channel," ] - Ran the NootNoot Command!") ## Add counter
+## Terra's slut command END ##
+
 
 ## Add Commands to bot ##
 
@@ -200,7 +212,8 @@ PerlsAssistant.add_command(signup)
 PerlsAssistant.add_command(ping)
 PerlsAssistant.add_command(nootnoot)
 PerlsAssistant.add_command(sendAs)
-## Terra did this^^^^^
+PerlsAssistant.add_command(suggest)
+
 
 ## Add Commands to bot END ##
 ## Delete in emergency ##
