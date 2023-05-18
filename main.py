@@ -119,7 +119,7 @@ async def sendAs(ctx, content):
         await ctx.send(f"```{content}```")
     
 @sendAs.error
-async def mod_ban_error(error, ctx):
+async def sendAs_error(error, ctx):
     if isinstance(error, CheckFailure):
         await PerlsAssistant.send_message(ctx.message.channel, "Looks like you don't have the perm.")
 ## SENDAS BOT END ##
@@ -192,7 +192,7 @@ async def nootnoot(ctx):
 
 ## Terra's slut command START ##
 @commands.command(aliases=['Suggest','SUGGEST', 'SUggest'])
-async def suggest(ctx):
+async def suggest(ctx,suggest):
   suggest = ctx.message ## reading the message sent
   channel = ctx.get_channel(1108282222030639145) ## selecting the channel
   ctx.channel.send(suggest)
