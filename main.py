@@ -88,7 +88,8 @@ async def shitpost(ctx):
                             perlsMonitorString,
                             pickleTubString,
                             donkeyHard,
-                            drinkingYesString]
+                            drinkingYesString,
+                            wikiShitpostingString]
     selectedShitPost = random.choice(perlsShitPostLibrary)
     user = ctx.author
     channel = ctx.channel
@@ -198,8 +199,8 @@ async def suggest(ctx,suggest):
   ctx.channel.send(suggest)
   await ctx.send('butt') ## after suggestion is read, send this
   user = ctx.author ## for the below
-  
-  print(user,"[",channel," ] - Ran the NootNoot Command!") ## Add counter
+  print(user,"[",channel," ] - Ran the NootNoot Command!")
+   ## Add counter
 ## Terra's slut command END ##
 
 
