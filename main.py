@@ -5,6 +5,7 @@
 
 ## Imports ##
 import random
+import time
 import discord
 from discord.ext import commands
 import os
@@ -18,7 +19,7 @@ from datetime import datetime
 from discord.ext.commands import has_permissions, CheckFailure
 import csv
 from array import *
-
+from manager import *
 ## Imports END ##
 os.system('cls')
 intents = discord.Intents.default()
@@ -59,7 +60,117 @@ with open('data.csv',mode="r") as csv_file:
             players.insert(i,[IGN,DISCT,TZONE,playerNum,WINS,LOSSES,TLOSSES,TWINS,LBPLACE])
             lb.insert(i,[IGN,WINS,LBPLACE])
     print(f'Processed {line_count} lines.')
-   
+    rows=len(players) #finding the max number of rows in the matrix, in this case 3
+    columns=len(players[0])
+
+
+@commands.command(aliases=['STATS','Stats'])
+async def stats(ctx, message):
+  rand = random.randint(1,100)
+  channel = ctx.channel
+  x = line_count / 9.5
+  flag = False
+  for i in range(rows):
+      for j in range(columns):
+        if players[i][j]== message:
+          ## Pull the variables from the index 
+          ign = players[i][j]
+          wins = players[i][4]
+          losses = players[i][5]
+          Aloss = players[i][7]
+          Awins = players[i][6]
+          standing = players[i][8]
+          flag = True
+          break
+  if flag == False:
+    print ("Not found!")
+    await ctx.send("ERROR! -- User is not found. Try ^signup")
+  pass
+  embedVar = discord.Embed(title="<:panda_flex:652189894055165952> Leaderboard <:panda_flex:652189894055165952>", description="complex pvp tourney", color=0x00ff00)
+  embedVar.add_field(name="Leaderboard", value=f"""
+   **<:pengu:1100294359355760650> List of stats:: <:pengu:1100294359355760650>**
+
+  **User:** {message}
+
+  <:small_blurple_diamond:846013373186310175>**IGN:** {ign}
+  
+  <:small_blurple_diamond:846013373186310175>**Discord ID:** {ctx.author.id}
+
+   -__Current Tournament__-
+  <a:trophy:893215804525543434>**Wins:** {wins}
+  <:notstonks:875010986338304042>**Losses:** {losses}
+  **Your Leaderboard Position:** {standing}!
+
+  -__All Time__-
+  <:upvote:1030145335001104544>**All-time Wins:** {Awins}
+  <:downvote:990388876688371774>**All-time Losses:** {Aloss}
+  
+  <a:cooldoge:755799354861813820>**Cool-rating:** {rand}%
+ """, inline=False)
+  await ctx(embed=embedVar)
+  
+
+  print(message,"[",channel," ] - Ran the stats Command!") ## Add counter
+
+@commands.command(aliases=['LIVE','Live'])
+async def live(ctx):
+  # x = line_count / 9.5
+  # flag = False
+## thinking
+  # z = 0
+  # have x go through the list and columns until x = the IGN index
+  # then have y go through the list to find the LB index and Stop 
+  # then store x and y in a variable called ign and standing and add to the `lb list`.
+  # then add 1 to z
+  # then repeat until z = len(the list))
+    lb.sort() 
+    firstIGN = lb[0][0]
+    firstLB = lb[0][2]
+
+    secondIGN = lb[1][0]
+    secondLB = lb[1][2]
+
+    thirdIGN = lb[2][0]
+    thirdLB = lb[2][2]
+
+    fourthIGN = lb[3][0]
+    fourthLB = lb[3][2]
+
+    fifthIGN = lb[4][0]
+    fifthLB = lb[4][2]
+
+    sixthIGN = lb[5][0]
+    sixthLB = lb[5][2]
+
+    seventhIGN = lb[6][0]
+    seventhLB = lb[6][2]
+
+    eighthIGN = lb[7][0]
+    eighthLB = lb[7][2]
+
+    ninethIGN = lb[8][0]
+    ninethLB = lb[8][2]
+
+    tenthIGN = lb[9][0]
+    tenthLB = lb[9][2]
+
+  
+    await ctx.send(f'''
+      __**The Top 10 are as follows:**__
+      **{firstIGN}** is **{firstLB}**st!
+      **{secondIGN}** is **{secondLB}**nd!
+      **{thirdIGN}** is **{thirdLB}**rd!
+      **{fourthIGN}** is **{fourthLB}**th!
+      **{fifthIGN}** is **{fifthLB}**th!
+      **{sixthIGN}** is **{sixthLB}**th!
+      **{seventhIGN}** is **{seventhLB}**th!
+      **{eighthIGN}** is **{eighthLB}**th!
+      **{ninethIGN}** is **{ninethLB}**th!
+      **{tenthIGN}** is **{tenthLB}**th!
+
+    ^stats (*your ign here*) **to see your standing**
+      ''')
+
 
 ## Come back to and ride a cactus. - Terra
 """
@@ -152,9 +263,19 @@ $$ |      \$$$$$$$\ $$ |      $$ |$$$$$$$  |      $$ |  $$ |$$$$$$$  |$$$$$$$  |
                                                                                                                                      
                     Production Version: \033[1;32m""",productionVersion,"\033[0m| Development Version: \033[1;32m",developmentVersion,"\033[0m| Bot Started On:",current_dateTime," \n")
     Client(intents=intents)
-    print(f'\033[0;32m@on_Ready \033[0;37m- \033[1;30mProcessed {line_count / 9} players.\033[0m')
-    print("\033[0;32m@PerlsLog \033[0;37m- \033[1;30m Listning for commands!\n")
-    print(lb)
+    print(f'\033[0;32m@on_Ready \033[0;37m- \033[1;30mProcessed {rows} players.\033[0m')
+    print("\033[0;32m@PerlsLog \033[0;37m- \033[1;30m Listening for commands!\n")
+    print("Current LB Players: ")
+    print("IGN, Wins, LBPLACE")
+    i = 0
+    while i != 10:
+        print(lb[i])
+        i = i + 1
+    if i == 10:
+        print("\n>> Await <<\n")
+        i = 0
+        return i
+
     
 ## SHITPOST ##
 @commands.command(aliases=['ShitPost', 'Shitpost', 'SHITPOST', 'shitPost'])
@@ -179,26 +300,7 @@ async def shitpost(ctx):
   
 
 ## ^stats ##
-@commands.command(aliases=['STATS','Stats'])
-async def stats(ctx):
-  rand = random.randint(1,100)
-  user = ctx.author
-  channel = ctx.channel
-  await ctx.send(f"""
-  **List of stats::**
-  **User:** {user}
-  **Discord ID:** {ctx.author.id}
-  **All-time Wins:** {row[6]}
-  **All-time Losses:** {row[7]}
-  **Cool-rating:** {rand}%
-  -__Current Tournament__-
-  **Wins:** {row[4]}
-  **Losses:** {row[5]}
-  **Your Leaderboard Position:**
-  
-  """)
 
-  print(user,"[",channel," ] - Ran the stats Command!") ## Add counter
 
 
 
@@ -407,9 +509,12 @@ PerlsAssistant.add_command(sendAs)
 PerlsAssistant.add_command(suggest)
 PerlsAssistant.add_command(thisiskillingme)
 PerlsAssistant.add_command(stats)
+PerlsAssistant.add_command(live)
 
 ## TERRA ADD FUN COMMANDS HERE! ##
-
+if __name__ == '__main__':
+    live(ctx)
+    print("Starting")
 
 
 ## Add Commands to bot END ##
