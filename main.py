@@ -87,8 +87,9 @@ async def stats(ctx, message):
     print ("Not found!")
     await ctx.send("ERROR! -- User is not found. Try ^signup")
   pass
-  embedVar = discord.Embed(title="<:panda_flex:652189894055165952> Leaderboard <:panda_flex:652189894055165952>", description="complex pvp tourney", color=0x00ff00)
-  embedVar.add_field(name="Leaderboard", value=f"""
+  
+  await ctx.send(f"""
+  
    **<:pengu:1100294359355760650> __**List of stats**__ <:pengu:1100294359355760650>**
 
   **User:** {message}
@@ -103,17 +104,15 @@ async def stats(ctx, message):
   <:trophy:1109405254199549962> **Your Leaderboard Position:** {standing}!
 
   -__All Time__-
-  <:champagne_glass:1109405418423336993> **All-time Wins:** {Awins}
+  <:gggg:1109402528522698885> **All-time Wins:** {Awins}
   <:clown:1109405802642550835> **All-time Losses:** {Aloss}
   
-
- """, inline=False)
-  await ctx(embed=embedVar)
+  """)
   
 
   print(message,"[",channel," ] - Ran the stats Command!") ## Add counter
 
-@commands.command(aliases=['LIVE','Live'])
+@commands.command(aliases=['LIVE','Live','lb'])
 async def live(ctx):
     lb.sort() 
     firstIGN = lb[0][0]
@@ -145,9 +144,24 @@ async def live(ctx):
 
     tenthIGN = lb[9][0]
     tenthLB = lb[9][2]
+    PerlAU = "PerlAU"
+    await ctx.send(f"""
+      __**The Top 10 are as follows:**__
+      **{PerlAU}** is **{1}**st!
+      **{PerlAU}** is **{2}**nd!
+      **{PerlAU}** is **{3}**rd!
+      **{PerlAU}** is **{4}**th!
+      **{PerlAU}** is **{5}**th!
+      **{PerlAU}** is **{6}**th!
+      **{PerlAU}** is **{7}**th!
+      **{PerlAU}** is **{8}**th!
+      **{PerlAU}** is **{9}**th!
+      **{PerlAU}** is **{10}**th!
 
-  
-    await ctx.send(f'''
+    ^stats (*your ign here*) **to see your standing**
+    **Note** - PerlAU goated
+              """)
+''' await ctx.send(f
       __**The Top 10 are as follows:**__
       **{firstIGN}** is **{firstLB}**st!
       **{secondIGN}** is **{secondLB}**nd!
@@ -161,7 +175,7 @@ async def live(ctx):
       **{tenthIGN}** is **{tenthLB}**th!
 
     ^stats (*your ign here*) **to see your standing**
-      ''')
+      )'''
 
 
 ## Come back to and ride a cactus. - Terra
@@ -202,37 +216,7 @@ with open('lb.csv', mode='w') as lb_file:
 
 ## END READ WRITE CSV FUNCTIONALITY ##
 
-"""
-@PerlsAssistant.event
-async def on_message(message):
-  username = str(message.author).split("#")[0]
-  user_message = str(message.content)
-  #channel = discord.TextChannel()
-  #print(f'{username}: {user_message} ({channel})')
-  seconds = 5 # The seconds ago to check messages.
 
-  now = datetime.datetime.now()
-
-  messages = 0
-## ANTI SPAM ##
-#DONT WORK #
-  #async for message in channel.history():
-      #if message.author == PerlsAssistant.user:
-         # message_time = message.created_at.timestamp()
-          #if message_time > now - datetime.timedelta(seconds=seconds):
-           #   messages += 1
-
-# PERL NEEDS TO FIX THIS #
-
-      # WORKS #
-          #flaggedMessages = "FUCK"
-          #if user_message == flaggedMessages:
-           # await message.delete()
-           # return
-    # DONT TOUCH THIS PLEASE <3 Perl #
- ## ANTI SPAM ##
- 
-"""
 ## WHEN BOT HAS STARTED ##
 @PerlsAssistant.event # event is onready ie when bot starts
 async def on_ready():
@@ -332,11 +316,11 @@ async def helpme(ctx):
     __**Help Desk**__
     **Try:**
     
-    **^getids** -- 
-    **^shitpost** -- 
-    **^signup** -- (In development)
-    **^tourneystats** [username] --  displays wins losses and kd's (In development)
-    **^fighttime** [username] -- displays the players next fight time and info about the fight (In development)
+    **^getids** -- Get your discord id
+    **^shitpost** -- You get it
+    **^stats** [username] --  displays wins losses and kd's 
+    **^fighttime** [username] -- displays the players next fight time and info about the fight [!!!INACTIVE!!!]
+    **^lb** -- Leaderboards
     **^ping** -- *Shows bot latency *
     **^nootnoot** -- *Noot NOOT! *
 
@@ -345,8 +329,7 @@ async def helpme(ctx):
     --------------------------------------
     Version: {productionVersion}
     --------------------------------------
-    PLEASE BE AWARE MOST OF THESE FEATURES HAVE NOT YET BEEN COMPLETED.
-    THIS IS A BETA BOT
+    PLEASE BE AWARE THIS IS A BETA BOT
     --------------------------------------
     """)
     user = ctx.author
@@ -365,67 +348,6 @@ async def ping(ctx):
 
 
 
-
-
-
-## Signup DM Chain ##
-
-@commands.command(aliases=['SignUp', 'Sign', 'SIGNUP', 'SIGNup'])
-async def signup(ctx):
-  # if person who sends the message is the same person whom wrote the message
-      await ctx.send("Sliiiiding into those DMs.") # once done, sends a DM with this message left in the channel.
-      channel = ctx.channel
-      user = ctx.author # gets the user's dm
-      def check(check):
-          return check.author == ctx.author and check.channel == ctx.channel
-        ## First DM message.
-
-      await user.send("""**Hello!**
-      _-Blah Blah Blah-_
-      Please answer a few questions and we will sort out the rest.
-      **Question 1:**
-      *What is your In Game Name?*
-
-      """) ## First question ##
-
-        
-      msg = await PerlsAssistant.wait_for("message", check=check, timeout=30)
-      await ctx.send(f"Your name is {msg.content}")
-      IGN = msg.content  
-      print(f"{msg.author} - Input -->> {msg.content}. For the question 'What is your name?'")
-        
-      await ctx.send("""
-      Thank you for this!
-      **Question 2:**
-      *What is your discord tag?*
-        
-      """) ## Second question ##
-        
-      msg2 = await PerlsAssistant.wait_for("message", check=check ,timeout=30)
-      DTAG = msg2.content
-      await ctx.send(f"You're @{msg2.content}")
-        
-      
-      print(f"{msg.author} - Input -->> {msg.content}. For the question 'Whats your discord?'")
-      ## Writing to the .txt file: responseList
-
-      TZONE = await PerlsAssistant.wait_for("message", check=check, timeout=30)
-      DTAG = msg2.content
-      await ctx.send(f"You're @{msg2.content}")
-        
-      
-      print(f"{msg.author} - Input -->> {msg.content}. For the question 'Whats your discord?'")
-      ## Writing to the .txt file: responseList
-      
-      await ctx.send(f"""
-      Thank you so much for entering into the Complex Events!
-      We hope to see a {msg.content} there!
-      """) ## Ending of questions ##
-      i = 0
-      print(f"[^signup] - Signups this session {i}")
-      print(user,"[",channel," ] - Ran The signup Command!") ## Add counter
-      #perlsWriter.writerow([IGN,DTAG,TZONE])
-
   ## Signup DM Chain END ##
         
 @commands.command()
@@ -434,8 +356,6 @@ async def getPlayers(ctx):
   user = ctx.author
   channel = ctx.channel
   print(user,"[",channel," ] - Ran the NootNoot Command!") ## Add counter
-
-
 
 
 
@@ -449,6 +369,7 @@ async def nootnoot(ctx):
   print(user,"[",channel," ] - Ran the NootNoot Command!") ## Add counter
 ## Terra's NootNoot Command END ##
 
+'''
 ## Terra's slut command START ##
 @commands.command(aliases=['Suggest','SUGGEST', 'SUggest'])
 async def suggest(ctx,suggest):
@@ -459,20 +380,8 @@ async def suggest(ctx,suggest):
   user = ctx.author ## for the below
   print(user,"[",channel," ] - Ran the NootNoot Command!")
    ## Add counter
-
-## Terra's testing command START ##
-@commands.command(alliases=["thisIsKillingMe", "THISISKILLINGME", "FORFUCKSAKE"])
-async def thisiskillingme(ctx):
-    def check(msg):
-        return msg.author == ctx.author and msg.channel == ctx.channel
-
-    await ctx.send('Whats your name?')
-    msg = await PerlsAssistant.wait_for("message", check=check, timeout=30)
-    await ctx.send(f"Your name is {msg.content}")
-
-    print(f"{msg.author} - Input -->> {msg.content}. For the question 'What is your name?'")
-
-
+   
+   '''
 
    # Create a list of text ["Question 1","Question 2","Question 3"]
    # if not in message guild aka in dms
@@ -510,12 +419,11 @@ async def AddPlayer(ctx, IGN):
 PerlsAssistant.add_command(shitpost)
 PerlsAssistant.add_command(getids)
 PerlsAssistant.add_command(helpme)
-PerlsAssistant.add_command(signup)
+#PerlsAssistant.add_command(signup)
 PerlsAssistant.add_command(ping)
 PerlsAssistant.add_command(nootnoot)
 PerlsAssistant.add_command(sendAs)
-PerlsAssistant.add_command(suggest)
-PerlsAssistant.add_command(thisiskillingme)
+#PerlsAssistant.add_command(suggest)
 PerlsAssistant.add_command(stats)
 PerlsAssistant.add_command(live)
 PerlsAssistant.add_command(AddGroup)
