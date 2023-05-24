@@ -20,6 +20,7 @@ from discord.ext.commands import has_permissions, CheckFailure
 import csv
 from array import *
 from manager import *
+
 ## Imports END ##
 os.system('cls')
 intents = discord.Intents.default()
@@ -88,24 +89,24 @@ async def stats(ctx, message):
   pass
   embedVar = discord.Embed(title="<:panda_flex:652189894055165952> Leaderboard <:panda_flex:652189894055165952>", description="complex pvp tourney", color=0x00ff00)
   embedVar.add_field(name="Leaderboard", value=f"""
-   **<:pengu:1100294359355760650> List of stats:: <:pengu:1100294359355760650>**
+   **<:pengu:1100294359355760650> __**List of stats**__ <:pengu:1100294359355760650>**
 
   **User:** {message}
-
-  <:small_blurple_diamond:846013373186310175>**IGN:** {ign}
+  **IGN:** {ign}
+  **Discord ID:** {ctx.author.id}
+  <:fire:1109406181325283339> **Cool-rating:** {rand}%
   
-  <:small_blurple_diamond:846013373186310175>**Discord ID:** {ctx.author.id}
-
-   -__Current Tournament__-
-  <a:trophy:893215804525543434>**Wins:** {wins}
-  <:notstonks:875010986338304042>**Losses:** {losses}
-  **Your Leaderboard Position:** {standing}!
+  **-__Current Tournament__-**
+  
+  <:regional_indicator_w:1109404805450965042> **Wins:** {wins} 
+  <:regional_indicator_l:1109404918521024512> **Losses:** {losses} 
+  <:trophy:1109405254199549962> **Your Leaderboard Position:** {standing}!
 
   -__All Time__-
-  <:upvote:1030145335001104544>**All-time Wins:** {Awins}
-  <:downvote:990388876688371774>**All-time Losses:** {Aloss}
+  <:champagne_glass:1109405418423336993> **All-time Wins:** {Awins}
+  <:clown:1109405802642550835> **All-time Losses:** {Aloss}
   
-  <a:cooldoge:755799354861813820>**Cool-rating:** {rand}%
+
  """, inline=False)
   await ctx(embed=embedVar)
   
@@ -114,15 +115,6 @@ async def stats(ctx, message):
 
 @commands.command(aliases=['LIVE','Live'])
 async def live(ctx):
-  # x = line_count / 9.5
-  # flag = False
-## thinking
-  # z = 0
-  # have x go through the list and columns until x = the IGN index
-  # then have y go through the list to find the LB index and Stop 
-  # then store x and y in a variable called ign and standing and add to the `lb list`.
-  # then add 1 to z
-  # then repeat until z = len(the list))
     lb.sort() 
     firstIGN = lb[0][0]
     firstLB = lb[0][2]
