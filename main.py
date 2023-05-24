@@ -19,7 +19,7 @@ from datetime import datetime
 from discord.ext.commands import has_permissions, CheckFailure
 import csv
 from array import *
-from manager import *
+import data.manager as manager
 
 ## Imports END ##
 os.system('cls')
@@ -483,8 +483,24 @@ async def thisiskillingme(ctx):
         # EXIT TEXT 
 
 
+## ADDGROUP [Child of manager.py] ##
 
-   
+
+@commands.command(aliases=['addgroup','addGroup','Addgroup'])
+async def AddGroup(ctx,IGN,Group):
+   print(f'\033[0;32mManager@AddGroup \033[0;37m- \033[1;30mAdded {IGN} to the tourney in group {Group}!\033[0m')
+   await ctx.send(f'```Manager@AddGroup - Added {IGN} to the tourney in group {Group}!```')
+
+   await manager.AssignGroup(ctx,IGN=IGN,Group=Group)
+
+## Add Player
+@commands.command(aliases=['addplayer','addPlayer','Addplayer'])
+async def AddPlayer(ctx, IGN):
+    i = len(players) + 1
+    players[i].insert([IGN,IGN,'NILL',i,0,0,0,0,i,'NULL'])
+    print(f'\033[0;32mManager@AddPlayer \033[0;37m- \033[1;30mAdded {IGN} to the tourney!\033[0m')
+    pass
+  
 ## Terra's testing command END ##
 
 
@@ -502,6 +518,8 @@ PerlsAssistant.add_command(suggest)
 PerlsAssistant.add_command(thisiskillingme)
 PerlsAssistant.add_command(stats)
 PerlsAssistant.add_command(live)
+PerlsAssistant.add_command(AddGroup)
+PerlsAssistant.add_command(AddPlayer)
 
 ## TERRA ADD FUN COMMANDS HERE! ##
 if __name__ == '__main__':
