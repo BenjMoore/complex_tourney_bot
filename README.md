@@ -1,2 +1,3 @@
 # discord_bot
- you get it
+Discord Tourney Bot
+
