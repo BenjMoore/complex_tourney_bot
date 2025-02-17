@@ -1,0 +1,9 @@
+discord.py>=2.3.2
+python-dotenv>=1.0.0
+mcstatus>=10.0.3
+pymongo>=4.6.1
+Flask>=3.0.0
+requests>=2.31.0
+yt_dlp
+mcstatus
+PyNaCl
